@@ -22,7 +22,7 @@ public class BuscarFarmaciaPorCalleTest extends SpringTest{
 		
 		Direccion direccion = new Direccion();
 		direccion.setCalle("Prueba Calle");
-		direccion.setNumero(4568);
+		direccion.setNumero("4568");
 		
 		Session session = getSession();
     	session.save(direccion);

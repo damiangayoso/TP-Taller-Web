@@ -13,11 +13,11 @@ public class Direccion {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String calle;
-	private int numero;
+	private String numero;
 	@ManyToOne
 	private Barrio barrio;
 	
-	public Direccion(String calle, int numero, Barrio barrio) {
+	public Direccion(String calle, String numero, Barrio barrio) {
 		super();
 		this.calle = calle;
 		this.numero = numero;
@@ -44,11 +44,11 @@ public class Direccion {
 		this.calle = calle;
 	}
 	
-	public int getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 	
-	public void setNumero(int numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 

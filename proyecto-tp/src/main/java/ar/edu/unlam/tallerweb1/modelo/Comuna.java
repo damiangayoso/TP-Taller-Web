@@ -42,6 +42,9 @@ public class Comuna {
 		this.barrios = barrios;
 	}
 	
+	public void addBarrios(Barrio barrios) {
+		this.barrios.add(barrios);
+	}
 	
 	
 }
