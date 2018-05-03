@@ -22,12 +22,15 @@ public class BuscarFarmaciaPorBarrioTest extends SpringTest{
     public void buscarPorBarrio(){
 		String barrioBusqueda;
 		
+		// Creamos un objeto del tipo Barrio y lo seteamos
 		Barrio barrio = new Barrio();
 		barrio.setNombre("Barrio Prueba");
 		
+		// lo guardamos
 		Session session = getSession();
     	session.save(barrio);
     	
+    	// mismo proceso para Direccion y Farmacia
 		Direccion direccion = new Direccion();
 		direccion.setCalle("Prueba Calle");
 		direccion.setNumero("4568");
@@ -42,19 +45,24 @@ public class BuscarFarmaciaPorBarrioTest extends SpringTest{
     	
     	session.save(farmacia);
     	
+    	// pedimos el nombre de barrio a buscar
     	Scanner sc = new Scanner(System.in);
     	System.out.println("Escriba el Barrio a Buscar:");
     	barrioBusqueda = sc.nextLine();
     	
+    	// buscamos de acuerdo al nombre aportado anteriormente
     	List<Farmacia> resultado = getSession().createCriteria(Farmacia.class)
     			.createAlias("direccion", "direccion2")
     			.createAlias("direccion2.barrio", "barrioBuscado")
     			.add(Restrictions.eq("barrioBuscado.nombre", barrioBusqueda))
     			.list();
     	
+    	// comprobamos que la lista no este vacia
     	assertThat(resultado).isNotEmpty();
+    	
+    	// recorremos la lista para comprobar que todos los resultados son correctos
     	for(Farmacia barrioResultado: resultado){
-        	assertThat(barrioResultado.getDireccion().getBarrio().getNombre()).isEqualTo("Barrio Prueba"); 
+        	assertThat(barrioResultado.getDireccion().getBarrio().getNombre()).isEqualTo(barrioBusqueda); 
 	   }
 	}
 }

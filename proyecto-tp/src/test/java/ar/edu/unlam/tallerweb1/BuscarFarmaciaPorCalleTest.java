@@ -20,31 +20,39 @@ public class BuscarFarmaciaPorCalleTest extends SpringTest{
     public void buscarPorDireccion(){
 		String calleBusqueda;
 		
+		// Creamos un objeto de tipo Direccion y lo seteamos
 		Direccion direccion = new Direccion();
 		direccion.setCalle("Prueba Calle");
 		direccion.setNumero("4568");
 		
+		// guardamos
 		Session session = getSession();
     	session.save(direccion);
     	
+    	// hacemos lo mismo con Farmacia
     	Farmacia farmacia = new Farmacia();
     	farmacia.setNombre("Farmacia A");
     	farmacia.setTelefono("4568-9874");
     	farmacia.setDireccion(direccion);
     	session.save(farmacia);
     	
+    	// como pide una calle y no especifica cual, pedimos que ingrese el nombre de la calle a buscar 
     	Scanner sc = new Scanner(System.in);
-    	System.out.println("Escriba la Caller a Buscar:");
+    	System.out.println("Escriba la Calle a Buscar:");
     	calleBusqueda = sc.nextLine();
     	
+    	// buscamos la calle con el dato aportado anteriormente
     	List<Farmacia> resultado = getSession().createCriteria(Farmacia.class)
     			.createAlias("direccion", "calleBuscada")
     			.add(Restrictions.eq("calleBuscada.calle", calleBusqueda))
     			.list();
     	
+    	// comprobamos que la lista no este vacia
     	assertThat(resultado).isNotEmpty();
+    	
+    	// recorremos la lista para comprobar que todos los resultados sean correctos
     	for(Farmacia calleResultado: resultado){
-        	assertThat(calleResultado.getDireccion().getCalle()).isEqualTo("Prueba Calle");       	
+        	assertThat(calleResultado.getDireccion().getCalle()).isEqualTo(calleBusqueda);       	
     	}
     	
 	}
