@@ -3,7 +3,6 @@ package ar.edu.unlam.tallerweb1;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-import java.util.Scanner;
 
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -45,10 +44,8 @@ public class BuscarFarmaciaPorBarrioTest extends SpringTest{
     	
     	session.save(farmacia);
     	
-    	// pedimos el nombre de barrio a buscar
-    	Scanner sc = new Scanner(System.in);
-    	System.out.println("Escriba el Barrio a Buscar:");
-    	barrioBusqueda = sc.nextLine();
+    	// Seteamos el nombre de barrio a buscar
+    	barrioBusqueda = "Barrio Prueba";
     	
     	// buscamos de acuerdo al nombre aportado anteriormente
     	List<Farmacia> resultado = getSession().createCriteria(Farmacia.class)
