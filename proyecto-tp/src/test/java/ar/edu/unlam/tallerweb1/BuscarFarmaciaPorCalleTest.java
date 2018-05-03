@@ -3,7 +3,6 @@ package ar.edu.unlam.tallerweb1;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-import java.util.Scanner;
 
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -36,10 +35,8 @@ public class BuscarFarmaciaPorCalleTest extends SpringTest{
     	farmacia.setDireccion(direccion);
     	session.save(farmacia);
     	
-    	// como pide una calle y no especifica cual, pedimos que ingrese el nombre de la calle a buscar 
-    	Scanner sc = new Scanner(System.in);
-    	System.out.println("Escriba la Calle a Buscar:");
-    	calleBusqueda = sc.nextLine();
+    	// seteamos el nombre de la calle a buscar 
+    	calleBusqueda = "Prueba Calle";
     	
     	// buscamos la calle con el dato aportado anteriormente
     	List<Farmacia> resultado = getSession().createCriteria(Farmacia.class)
